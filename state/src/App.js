@@ -13,12 +13,23 @@ export default class App extends Component {
       imgSrc: personImg,
       profession: "Fullstack Developer",
       show: false,
+      time: 0,
     };
+
     this.state = Person;
   }
-
+  componentDidMount() {
+    this.timer = setInterval(
+      () =>
+        this.setState((prevState) => ({
+          time: prevState.time + 1,
+        })),
+      1000
+    );
+  }
   render() {
-    const { fullName, bio, imgSrc, profession } = this.state;
+    const { fullName, bio, imgSrc, profession, time } = this.state;
+
     const onClick = () =>
       this.state.show === false
         ? this.setState({ show: true })
@@ -27,10 +38,10 @@ export default class App extends Component {
       <div>
         <div className="top">
           <button onClick={onClick}>Toggle</button>
+          <p> componentDidMount since : {time} seconds</p>
         </div>
         {this.state.show ? (
           <React.Fragment>
-            <p>{this.mountTime}</p>
             <Profile
               fullName={fullName}
               profession={profession}
