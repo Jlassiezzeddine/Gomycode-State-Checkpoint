@@ -28,10 +28,10 @@ export default class App extends Component {
     );
   }
   render() {
-    const { fullName, bio, imgSrc, profession, time } = this.state;
+    const { fullName, bio, imgSrc, profession, show, time } = this.state;
 
     const onClick = () =>
-      this.state.show === false
+      show === false
         ? this.setState({ show: true })
         : this.setState({ show: false });
     return (
