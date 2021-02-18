@@ -1,25 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import "./App.css";
+import personImg from "./images/personImg.jpg";
+import Profile from "./Profile";
+
+export default class App extends Component {
+  constructor(props) {
+    super(props);
+    let Person = {
+      fullName: "John Doe",
+      bio: "Lorem ipsum dolor sit amet",
+      imgSrc: personImg,
+      profession: "Fullstack Developer",
+      show: false,
+    };
+    this.state = Person;
+  }
+
+  render() {
+    const { fullName, bio, imgSrc, profession } = this.state;
+    const onClick = () =>
+      this.state.show === false
+        ? this.setState({ show: true })
+        : this.setState({ show: false });
+    return (
+      <div>
+        <div className="top">
+          <button onClick={onClick}>Toggle</button>
+        </div>
+        {this.state.show ? (
+          <React.Fragment>
+            <p>{this.mountTime}</p>
+            <Profile
+              fullName={fullName}
+              profession={profession}
+              bio={bio}
+              imgSrc={imgSrc}
+            />
+          </React.Fragment>
+        ) : null}
+      </div>
+    );
+  }
 }
-
-export default App;
